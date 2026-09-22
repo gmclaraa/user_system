@@ -3,6 +3,8 @@ import axios from 'axios'
 import './style.css'
 import Trash from '../../assets/trash.svg'
 
+const API_URL = 'https://user-system-wzx4.onrender.com'
+
 function Home() {
   const [users, setUsers] = useState([])
   const [name, setName] = useState('')
@@ -10,7 +12,7 @@ function Home() {
   const [email, setEmail] = useState('')
 
   async function getUsers() {
-    const response = await axios.get('http://localhost:3000/usuarios')
+    const response = await axios.get(`${API_URL}/usuarios`)
     setUsers(response.data)
   }
 
@@ -19,7 +21,7 @@ function Home() {
   }, [])
 
   async function createUser() {
-    await axios.post('http://localhost:3000/usuarios', {
+    await axios.post(`${API_URL}/usuarios`, {
       name,
       age: Number(age),
       email,
@@ -31,7 +33,7 @@ function Home() {
   }
 
   async function deleteUser(id) {
-    await axios.delete(`http://localhost:3000/usuarios/${id}`)
+    await axios.delete(`${API_URL}/usuarios/${id}`)
     getUsers()
   }
 
