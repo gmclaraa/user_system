@@ -1,33 +1,67 @@
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 import './style.css'
 import Trash from '../../assets/trash.svg'
 
 function Home() {
+  const [users, setUsers] = useState([])
+  const [name, setName] = useState('')
+  const [age, setAge] = useState('')
+  const [email, setEmail] = useState('')
 
-  const users = [
-    {
-      id: '68764387',
-      name: 'Rodolfo',
-      age: 22,
-      email: 'rod@email.com'
-    },
-    {
-      id: '68764388',
-      name: 'Aline',
-      age: 33,
-      email: 'aline@email.com'
-    }
+  async function getUsers() {
+    const response = await axios.get('http://localhost:3000/usuarios')
+    setUsers(response.data)
+  }
 
-  ]
+  useEffect(() => {
+    getUsers()
+  }, [])
+
+  async function createUser() {
+    await axios.post('http://localhost:3000/usuarios', {
+      name,
+      age: Number(age),
+      email,
+    })
+    setName('')
+    setAge('')
+    setEmail('')
+    getUsers()
+  }
+
+  async function deleteUser(id) {
+    await axios.delete(`http://localhost:3000/usuarios/${id}`)
+    getUsers()
+  }
+
   return (
     <div className='container'>
       <form>
         <h1>Cadastro de Usuários</h1>
-        <input placeholder='Nome' name='nome' type='text' />
-        <input placeholder='Idade' name='idade' type='number' />
-        <input placeholder='E-mail' name='email' type='email' />
-        <button type='button'>Cadastrar</button>
+        <input
+          placeholder='Nome'
+          name='nome'
+          type='text'
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          placeholder='Idade'
+          name='idade'
+          type='number'
+          value={age}
+          onChange={(e) => setAge(e.target.value)}
+        />
+        <input
+          placeholder='E-mail'
+          name='email'
+          type='email'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <button type='button' onClick={createUser}>Cadastrar</button>
       </form>
-
 
       {users.map((user) => (
         <div className='card' key={user.id}>
@@ -36,13 +70,11 @@ function Home() {
             <p>Idade: <span>{user.age}</span></p>
             <p>Email: <span> {user.email}</span></p>
           </div>
-          <button>
+          <button onClick={() => deleteUser(user.id)}>
             <img src={Trash} />
           </button>
         </div>
       ))}
-
-
     </div>
   )
 }
