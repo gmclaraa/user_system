@@ -1,7 +1,6 @@
 # 👥 Sistema de Cadastro de Usuários
 
-Projeto desenvolvido para praticar o desenvolvimento Full-stack, integrando uma aplicação React moderna no Front-end com uma API Node.js/Express e Banco de Dados PostgreSQL no Back-end utilizando Prisma ORM.
-A aplicação permite o cadastro, listagem e remoção de usuários de forma dinâmica e em tempo real.
+Projeto desenvolvido para praticar o desenvolvimento Full-stack, integrando uma aplicação React moderna no Front-end com uma API Node.js/Express e Banco de Dados PostgreSQL no Back-end utilizando Prisma ORM. A aplicação permite o cadastro, listagem e remoção de usuários de forma dinâmica e em tempo real.
 
 ## 🛠️ Tecnologias utilizadas
 
@@ -33,3 +32,48 @@ A proposta foi criar um sistema web completo de gestão de utilizadores. Atravé
 - Exclusão de registos de forma dinâmica com confirmação imediata na interface
 - Comunicação assíncrona entre o Front-end em React e a API REST hospedada no Render
 - Tratamento de CORS e integração com PostgreSQL via Prisma
+
+## 🚀 Como executar
+
+### Pré-requisitos
+- [Node.js](https://nodejs.org/)
+- [Git](https://git-scm.com/)
+- PostgreSQL
+
+### 1. Clone o projeto
+
+```bash
+git clone [https://github.com/o-teu-utilizador/o-teu-repositorio.git](https://github.com/o-teu-utilizador/o-teu-repositorio.git)
+cd o-teu-repositorio
+```
+
+### 2. Back-end
+```bash
+cd server
+npm install
+```
+Crie o arquivo `.env` com sua conexão PostgreSQL:
+```env
+DATABASE_URL="sua_url_do_postgresql"
+```
+Depois:
+```bash
+npx prisma db push
+npm run start
+```
+
+### 3. Front-end
+Em outro terminal:
+```bash
+cd user-manager
+npm install
+npm run dev
+```
+
+### 4. Acesse
+Abra no navegador:
+```text
+http://localhost:5173
+```
+
+💡 Mantenha o Back-end e o Front-end rodando ao mesmo tempo.
